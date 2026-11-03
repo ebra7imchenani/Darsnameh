@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>پرامپت‌ساز درسنامه‌ی تصویری دروس ابتدایی</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#0f1b4a;--bg2:#050a1f;--card:#0f1d4a;--head:#1b2a5c;--field:#060c26;--line:#2a3a85;--text:#fff;--muted:#9aa6d6;--accent:#f5c531;--accent-ink:#1a1400;--gold:#c9a227;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root{--bg1:#eef2ff;--bg2:#dbe4ff;--card:#fff;--head:#e3e9ff;--field:#f6f8ff;--line:#9fb0ee;--text:#0f1b4a;--muted:#4b5a94;color-scheme:light}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+body{font-family:Vazirmatn,Tahoma,sans-serif;color:var(--text);background:linear-gradient(180deg,var(--bg1),var(--bg2)) fixed;line-height:1.8;text-align:right}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+main{max-width:640px;margin:0 auto;padding:20px 14px 28px}
+h1{text-align:center;font-size:1.55rem;font-weight:800;margin:10px 0 6px}
+.mascot{display:block;text-align:center;font-size:3rem;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){.mascot{animation:none}}
+.lead{text-align:center;color:var(--muted);line-height:2.1;margin:0 0 16px;font-size:.95rem}
+.chips{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:20px}
+.chip{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 18px;font-size:.9rem;width:fit-content;max-width:100%}
+.chip b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:800}
+.card{background:var(--card);border:2px dotted var(--gold);border-radius:22px;overflow:hidden;margin-bottom:18px}
+.card>header{background:var(--head);padding:12px 18px;display:flex;align-items:center;gap:10px}
+.card>header::before{content:"";width:5px;height:24px;border-radius:5px;background:var(--accent)}
+.card h2{margin:0;font-size:1.15rem;font-weight:800}
+.body{padding:16px 18px 18px}.f{margin-bottom:14px}.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-weight:700;margin-bottom:6px}
+input,select,textarea{width:100%;font:inherit;color:var(--text);background:var(--field);border:2px solid var(--line);border-radius:16px;padding:10px 14px;text-align:right}
+textarea{resize:vertical;min-height:84px}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
+.hint{color:var(--muted);font-size:.85rem;margin:0 0 10px}
+.t{display:flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:16px;padding:6px 12px;margin-bottom:8px;background:var(--field)}
+.t input[type=checkbox]{width:22px;height:22px;flex:none;accent-color:var(--accent);padding:0}
+.t span{flex:1;font-weight:700;font-size:.92rem}
+.opt{display:flex;align-items:center;gap:10px;font-weight:700;margin:0 0 8px}
+.opt input{width:22px;height:22px;accent-color:var(--accent);padding:0}
+.prog{display:flex;align-items:center;gap:12px;margin:4px 0 14px;font-size:.85rem;color:var(--muted)}
+.bar{flex:1;height:8px;border-radius:8px;background:var(--field);border:1px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.btns{display:flex;gap:10px}
+button{flex:1;font:inherit;font-weight:700;color:var(--text);background:transparent;border:3px solid var(--line);border-radius:16px;padding:10px 8px;cursor:pointer}
+button.main{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);width:100%}
+#out{min-height:260px;line-height:1.9;font-size:.9rem}
+#msg{min-height:1.6em;margin:10px 0 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+.gate{position:fixed;inset:0;z-index:99;display:none;align-items:center;justify-content:center;padding:20px;background:linear-gradient(180deg,var(--bg1),var(--bg2));overflow:auto}
+.gate.on{display:flex}
+.gbox{width:100%;max-width:420px;background:var(--card);border:2px dotted var(--gold);border-radius:22px;padding:22px 20px;text-align:center}
+.gbox h2{margin:6px 0 4px;font-size:1.25rem;font-weight:800}
+.gbox p{color:var(--muted);font-size:.9rem;margin:0 0 12px;line-height:2}
+.dcode{font-size:1.9rem;font-weight:800;letter-spacing:.18em;direction:ltr;background:var(--field);border:2px solid var(--line);border-radius:16px;padding:8px;margin:8px 0 10px;color:var(--accent)}
+.gbox input{direction:ltr;text-align:center;font-size:1.3rem;letter-spacing:.15em;margin:6px 0 10px}
+.gbtns{display:flex;gap:8px;margin-bottom:10px}
+.gerr{min-height:1.6em;color:#ff8a8a;font-size:.9rem;margin:0 0 6px}
+.designer{text-align:center;color:var(--muted);font-size:.85rem;margin:14px 0 0}
+.designer b{color:var(--accent)}
+.hidden-app{display:none}
+</style>
+</head>
+<body>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gt">
+<div class="gbox">
+<span class="mascot" aria-hidden="true">🦉</span>
+<h2 id="gt">فعال‌سازی برنامه</h2>
+<p>این کد دستگاه شماست. آن را برای ادمین بفرستید و «کد فعال‌سازی» را از او بگیرید.</p>
+<div class="dcode" id="dcode" aria-label="کد دستگاه">--------</div>
+<div class="gbtns"><button id="gCopy" type="button">کپی کد</button><button id="gSend" type="button">ارسال برای ادمین</button></div>
+<label for="acode">کد فعال‌سازی</label>
+<input id="acode" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="••••••••">
+<div class="gerr" id="gerr" role="alert"></div>
+<button class="main" id="gGo" type="button">ورود به برنامه</button>
+<p class="designer">طراح: <b>ابراهیم چنانی</b></p>
+</div></div>
+<main class="hidden-app" id="app">
+<span class="mascot" aria-hidden="true">🦉</span>
+<h1>پرامپت‌ساز درسنامه‌ی تصویری</h1>
+<p class="lead">مشخصات درس را وارد کنید تا پرامپتی ساخته شود که هوش مصنوعی با آن، از روی صفحه‌های کتاب، یک درسنامه‌ی کامل و مفصل با تصویرهای SVG، شخصیت‌های کارتونی و انیمیشن‌های کودکانه را در قالب فایل HTML بنویسد؛ با دکمه‌های PDF و Word.</p>
+<div class="chips">
+<div class="chip"><b>۱</b>مشخصات و بخش‌ها را انتخاب کنید</div>
+<div class="chip"><b>۲</b>پرامپت را کپی کنید</div>
+<div class="chip"><b>۳</b>همراه عکس یا متن صفحه‌های کتاب در هوش مصنوعی اجرا کنید</div>
+</div>
+
+<section class="card"><header><h2>مشخصات</h2></header><div class="body">
+<div class="f"><label for="teacher">نام و نام خانوادگی معلم</label><input id="teacher" placeholder="نام معلم"></div>
+<div class="f"><label for="school">دبستان</label><input id="school" placeholder="نام دبستان"></div>
+<div class="f"><label for="grade">پایه</label><select id="grade"><option value="">انتخاب کنید</option><option>اول</option><option>دوم</option><option>سوم</option><option>چهارم</option><option>پنجم</option><option>ششم</option></select></div>
+<div class="f"><label for="lesson">درس</label><input id="lesson" placeholder="مثلاً علوم تجربی"></div>
+<div class="f"><label for="topic">فصل یا موضوع درس</label><input id="topic" placeholder="مثلاً چرخه‌ی آب"></div>
+<div class="f"><label for="page">صفحه‌های کتاب</label><input id="page" placeholder="مثلاً ۱۲ تا ۱۸"></div>
+<div class="f"><label for="focus">مفاهیم مهم (اختیاری)</label><textarea id="focus" placeholder="مفاهیمی که باید حتماً پوشش داده شوند"></textarea></div>
+<div class="f"><label for="notes">ملاحظات خاص (اختیاری)</label><textarea id="notes" placeholder="مثلاً دانش‌آموزان کلاسم به بازی علاقه دارند"></textarea></div>
+</div></section>
+
+<section class="card"><header><h2>ظاهر و انیمیشن</h2></header><div class="body">
+<div class="row2">
+<div class="f"><label for="theme">تم تصویری</label><select id="theme">
+<option value="فضا (ستاره، ماه، سیاره و فضانورد بامزه)">فضا</option><option value="دریا (ماهی، خرچنگ، صدف و موج)">دریا</option><option value="طبیعت (گل، پروانه، کرم و خورشید خندان)">طبیعت</option><option value="حیوانات جنگل (روباه، جغد، سنجاب و قارچ)">حیوانات جنگل</option><option value="باغ‌وحش (فیل، زرافه و میمون)">باغ‌وحش</option><option value="دایناسورها (دایناسور بامزه، تخم و ردپا)">دایناسورها</option><option value="جشن (رنگین‌کمان، بادکنک و کلاه جشن)">جشن</option><option value="گنج و ماجراجویی (نقشه، قطب‌نما و جعبه‌ی گنج)">گنج و ماجراجویی</option><option value="شهر و حمل‌ونقل (ماشین، قطار و هواپیما)">شهر و حمل‌ونقل</option><option value="نقش‌های ایرانی (گل‌وبوته و نقوش ساده‌ی سنتی)">نقش‌های ایرانی</option>
+</select></div>
+<div class="f"><label for="mascot">شخصیت راهنما</label><select id="mascot"><option value="جغد دانا">🦉 جغد دانا</option><option value="روباه کنجکاو">🦊 روباه کنجکاو</option><option value="ربات مهربان">🤖 ربات مهربان</option><option value="فضانورد کوچولو">🧑‍🚀 فضانورد کوچولو</option><option value="خرگوش زرنگ">🐰 خرگوش زرنگ</option><option value="دایناسور خوش‌اخلاق">🦖 دایناسور خوش‌اخلاق</option></select></div>
+</div>
+<div class="row2">
+<div class="f"><label for="anim">میزان انیمیشن</label><select id="anim"><option value="زیاد">زیاد (بامزه و پرجنب‌وجوش)</option><option value="متوسط" selected>متوسط</option><option value="کم">کم و آرام</option></select></div>
+<div class="f"><label for="detail">جزئیات درسنامه</label><select id="detail"><option value="کامل">کامل</option><option value="بسیار کامل و مفصل" selected>بسیار کامل و مفصل</option><option value="خلاصه ولی دقیق">خلاصه ولی دقیق</option></select></div>
+</div>
+<div class="f"><label for="color">نوع صفحه</label><select id="color"><option value="رنگی">رنگی (شاد و جذاب)</option><option value="سیاه‌وسفید">سیاه‌وسفید (مناسب چاپ ارزان)</option></select></div>
+</div></section>
+
+<section class="card"><header><h2>بخش‌های درسنامه</h2></header><div class="body">
+<p class="hint">بخش‌هایی را که می‌خواهید در درسنامه باشد انتخاب کنید.</p>
+<div id="secs"></div>
+<p class="hint" id="sum"></p>
+<div class="prog"><span id="progText"></span><div class="bar"><i id="progBar"></i></div></div>
+<div class="btns"><button type="button" id="btnSample">پر کردن با نمونه</button><button type="button" id="btnClear">پاک کردن فرم</button></div>
+</div></section>
+
+<section class="card"><header><h2>پرامپت آماده</h2></header><div class="body">
+<textarea id="out" readonly aria-label="پرامپت ساخته‌شده"></textarea>
+<div style="margin-top:12px"><button type="button" class="main" id="btnCopy">کپی پرامپت</button></div>
+<p id="msg" role="status"></p>
+</div></section>
+<p class="designer">طراح: <b>ابراهیم چنانی</b></p>
+</main>
+
+<script>
+(function(){
+/* ===== تنظیمات ادمین: این دو مقدار را تغییر دهید ===== */
+var SECRET="CHANGE-ME-2026";      /* کلید محرمانه؛ باید با ابزار ادمین یکی باشد */
+var ADMIN_LINK="";                 /* مثلاً https://t.me/نام_کاربری_ادمین (خالی = اشتراک‌گذاری عادی) */
+/* ================================================== */
+var KD="pp_device",KA="pp_active";
+function st(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+function h53(str){var h1=0xdeadbeef,h2=0x41c6ce57,c;for(var i=0;i<str.length;i++){c=str.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}
+h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0)}
+function codeFor(d){return String(h53(SECRET+"|"+d)%100000000).padStart(8,"0")}
+function norm(t){return t.replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/\D/g,"")}
+var dev=st(KD);
+if(!dev||!/^\d{8}$/.test(dev)){var a=new Uint32Array(1);(window.crypto||{getRandomValues:function(x){x[0]=Math.random()*4294967295}}).getRandomValues(a);dev=String(10000000+a[0]%90000000);st(KD,dev)}
+var g=document.getElementById("gate"),app=document.getElementById("app");
+function open(){g.classList.remove("on");app.classList.remove("hidden-app")}
+if(st(KA)===codeFor(dev)){open()}else{g.classList.add("on");document.getElementById("dcode").textContent=dev}
+var err=document.getElementById("gerr");
+document.getElementById("gGo").onclick=function(){
+var v=norm(document.getElementById("acode").value);
+if(v===codeFor(dev)){st(KA,v);open()}else{err.textContent="کد فعال‌سازی نادرست است."}};
+document.getElementById("acode").addEventListener("keydown",function(e){if(e.key==="Enter")document.getElementById("gGo").click()});
+var txt="کد دستگاه برای فعال‌سازی پرامپت‌ساز درسنامه: "+dev;
+document.getElementById("gCopy").onclick=function(){
+function ok(){err.style.color="var(--muted)";err.textContent="کد کپی شد ✅"}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(dev).then(ok,function(){err.textContent="کد را دستی کپی کنید."})}else{err.textContent="کد را دستی کپی کنید."}};
+document.getElementById("gSend").onclick=function(){
+if(ADMIN_LINK){window.open(ADMIN_LINK+(ADMIN_LINK.indexOf("t.me")>-1?"?text="+encodeURIComponent(txt):""),"_blank");return}
+if(navigator.share){navigator.share({text:txt}).catch(function(){})}else{window.open("https://wa.me/?text="+encodeURIComponent(txt),"_blank")}};
+})();
+</script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var DOTS="..........",COUNT=["teacher","school","grade","lesson","topic","page"],TEXTS=["teacher","school","grade","lesson","topic","page","focus","notes"];
+var SECS=[
+{id:"goals",n:"هدف‌های درس (چه یاد می‌گیریم؟)",d:"سه تا پنج هدف ساده با علامت ستاره، همراه با یک سؤال کنجکاوی‌برانگیز آغازین",on:1},
+{id:"story",n:"داستان یا ماجرای شروع",d:"یک داستان کوتاه و جذاب با شخصیت راهنما که کودک را وارد مفهوم درس می‌کند",on:1},
+{id:"vocab",n:"واژه‌های تازه (کارت‌های برگردان)",d:"هر واژه روی یک کارت که با کلیک برمی‌گردد؛ یک‌طرف واژه و تصویر کوچک، طرف دیگر معنی ساده و مثال",on:1},
+{id:"explain",n:"توضیح اصلی درس گام‌به‌گام",d:"هر مفهوم در یک بخش جدا: توضیح ساده، تعریف، مثال‌های متنوع از زندگی روزمره و یک تصویر یا انیمیشن SVG",on:1},
+{id:"solved",n:"مثال‌های حل‌شده",d:"چند مثال کامل با مراحل حل یا توضیح که مرحله‌به‌مرحله ظاهر می‌شود",on:1},
+{id:"life",n:"درس در زندگی روزمره",d:"ارتباط مفهوم با زندگی، طبیعت یا خانه با مثال‌های ملموس",on:1},
+{id:"fun",n:"آیا می‌دانستید؟",d:"دو یا سه نکته‌ی جالب و شگفت‌انگیز مرتبط با درس",on:1},
+{id:"act",n:"فعالیت و آزمایش خانگی",d:"یک فعالیت ساده و ایمن با وسایل در دسترس و مراحل تصویری",on:0},
+{id:"mistake",n:"اشتباه‌های رایج",d:"اشتباه‌های متداول دانش‌آموزان و راه درست، با لحن مهربان",on:0},
+{id:"practice",n:"تمرین‌های تعاملی با پاسخ مخفی",d:"چند سؤال متنوع که پاسخ آن‌ها با دکمه‌ی «جوابش رو ببین» باز می‌شود",on:1},
+{id:"mind",n:"نقشه‌ی مفهومی و جمع‌بندی",d:"خلاصه‌ی درس به‌صورت نقشه‌ی ذهنی SVG و چند جمله‌ی کلیدی",on:1},
+{id:"self",n:"خودارزیابی من",d:"سه ایموجی صورت (😊 🙂 😐) برای جمله‌ی «این درس را یاد گرفتم» و یک پیام تشویقی",on:1}
+];
+function fa(n){return String(n).replace(/\d/g,function(d){return"۰۱۲۳۴۵۶۷۸۹"[d]})}
+function val(i,f){var v=$(i).value.trim();return v?v:f}
+var box=$("secs");
+SECS.forEach(function(s){var r=document.createElement("label");r.className="t";r.style.marginBottom="8px";r.innerHTML='<input type="checkbox" id="c_'+s.id+'"><span>'+s.n+'</span>';box.appendChild(r);$("c_"+s.id).checked=!!s.on});
+function picked(){return SECS.filter(function(s){return $("c_"+s.id).checked})}
+
+var SNIP=
+"function toWord(){\n"+
+"  var d = document.getElementById('paper').cloneNode(true);\n"+
+"  d.querySelectorAll('svg, .nodoc, button, script').forEach(function(e){ e.remove(); });\n"+
+"  d.querySelectorAll('details').forEach(function(x){ x.setAttribute('open', ''); });\n"+
+"  d.querySelectorAll('*').forEach(function(e){ e.style.animation = 'none'; });\n"+
+"  var h = '<html dir=\"rtl\" lang=\"fa\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:w=\"urn:schemas-microsoft-com:office:word\"><head><meta charset=\"utf-8\"><style>body{font-family:Vazirmatn,Tahoma,Arial;direction:rtl;text-align:right}table{border-collapse:collapse;width:100%}td,th{border:1px solid #000;padding:4px}</style></head><body>' + d.innerHTML + '</body></html>';\n"+
+"  var b = new Blob(['\\uFEFF' + h], {type:'application/msword'});\n"+
+"  var a = document.createElement('a');\n"+
+"  a.href = URL.createObjectURL(b); a.download = 'درسنامه.doc';\n"+
+"  document.body.appendChild(a); a.click(); a.remove();\n"+
+"}";
+
+function build(){
+var teacher=val("teacher",DOTS),school=val("school",DOTS),grade=val("grade",DOTS),lesson=val("lesson",DOTS),topic=val("topic",DOTS),page=val("page",DOTS),
+theme=$("theme").value,mascot=$("mascot").value,anim=$("anim").value,detail=$("detail").value,color=$("color").value,bw=$("color").selectedIndex===1,
+focus=val("focus","همه‌ی مفاهیم اصلی صفحه‌های یادشده، به‌طور متوازن"),notes=val("notes","ندارم"),p=picked();
+var secs=p.length?p.map(function(s,i){return fa(i+1)+") "+s.n+": "+s.d}).join("\n"):"بخش‌ها را خودت متناسب با درس و پایه انتخاب کن.";
+var animRule={"زیاد":"انیمیشن فراوان و بامزه در تقریباً هر بخش (شخصیت راهنما، اشیای معلق، ظاهرشدن مرحله‌ای، حرکت اجزای تصویر)","متوسط":"انیمیشن در بخش‌های مهم (شخصیت راهنما، یک تصویر متحرک برای هر مفهوم اصلی و ظاهرشدن نرم بخش‌ها)","کم":"انیمیشن‌های آرام و محدود (فقط شناوری ملایم شخصیت راهنما و ظاهرشدن نرم بخش‌ها)"}[anim];
+return `در نقش یک معلم باتجربه‌ی دوره‌ی ابتدایی، آشنا با کتاب‌های درسی ایران، نویسنده‌ی محتوای آموزشی کودکان و طراح تصویرگر، برای من یک «درسنامه‌ی تصویری» بسیار کامل، دقیق و جذاب بنویس و آن را به‌صورت یک فایل HTML تحویل بده که کاربر بتواند آن را هم به‌صورت PDF و هم Word دریافت کند.
+
+مشخصات درسنامه:
+- معلم: ${teacher}
+- دبستان: ${school}
+- پایه: ${grade}
+- درس: ${lesson}
+- فصل یا موضوع: ${topic}
+- صفحه‌های کتاب: ${page}
+- تم تصویری: ${theme}
+- شخصیت راهنمای کارتونی: ${mascot}
+- میزان انیمیشن: ${anim}
+- میزان جزئیات: ${detail}
+- نوع صفحه: ${color}
+- مفاهیم مهم: ${focus}
+- ملاحظات خاص: ${notes}
+
+بخش‌های درسنامه (به همین ترتیب):
+${secs}
+
+اصول محتوا:
+- محتوا فقط از کتاب درسی ${lesson} پایه‌ی ${grade}، صفحه‌های یادشده باشد. اگر عکس یا متن صفحه‌ها پیوست شد، فقط بر اساس آن‌ها بنویس و هیچ مطلب علمی نادرست یا خارج از کتاب اضافه نکن. اگر مطمئن نیستی، فرض خودت را در یک خط کوچک پایان درسنامه بنویس.
+- درسنامه باید «جزئیات کامل» داشته باشد: هیچ مفهوم، تعریف، قانون، فعالیت یا نکته‌ی کتاب جا نیفتد؛ هر مفهوم با توضیح ساده، دست‌کم دو مثال متنوع، و در صورت نیاز مقایسه یا جدول بیاید. در سطح «${detail}» بنویس و از کوتاه‌نویسی بپرهیز.
+- زبان ساده و متناسب با سن دانش‌آموز پایه‌ی ${grade}: جمله‌های کوتاه، واژه‌های آشنا، لحن گرم، مهربان و تشویقی. شخصیت «${mascot}» در سراسر درسنامه با حباب گفتگو، سؤال می‌پرسد، راهنمایی می‌کند و تشویق می‌کند.
+- از ساده به دشوار و با ترتیب منطقی؛ بین بخش‌ها یک جمله‌ی پیوند بیاور و هر بخش یک عنوان روشن داشته باشد.
+- ارزشیابی کیفی-توصیفی است؛ نمره‌ی عددی یا بارم نیاور.
+
+اصول تصویر و انیمیشن (بسیار مهم):
+- همه‌ی تصویرها را خودت با SVG درون‌خطی و CSS بکش (بدون هیچ تصویر یا فونت یا کتابخانه‌ی بیرونی و بدون اینترنت). برای هر مفهوم اصلی دست‌کم یک تصویر کارتونی بامزه با خط‌های گرد، رنگ‌های شاد و چهره‌های خندان (چشم و لبخند) مرتبط با تم «${theme}» و موضوع درس بساز؛ ایموجی را نیز برای تزئین و تأکید به‌کار ببر.
+- ${animRule}. انیمیشن‌ها را فقط با CSS @keyframes و transition بساز (مثل شناوری، چرخش آرام، پرش کوچک، چشمک، ظاهرشدن مرحله‌ای، حرکت ابر و آب و ستاره و…). هر انیمیشن باید به فهم مفهوم کمک کند، نه فقط تزئین باشد (مثلاً نشان‌دادن یک چرخه یا فرایند، یا حرکت مرحله‌ای یک مسئله).
+- کنترل‌های تعاملی ساده: کارت‌های واژه با کلیک برگردند، پاسخ تمرین‌ها با <details> باز شوند و مثال‌های حل‌شده مرحله‌به‌مرحله ظاهر شوند؛ همه بدون کتابخانه و با HTML و CSS (جاوااسکریپت کوتاه فقط در صورت نیاز).
+- رعایت دسترس‌پذیری: @media (prefers-reduced-motion: reduce) انیمیشن‌ها را خاموش کند و هر SVG معنادار aria-label کوتاه داشته باشد. تصویرها نباید متن را بپوشانند.
+- ظاهر کودکانه ولی منظم و خوانا: متن اصلی ۱۵ تا ۱۶ پیکسل روی زمینه‌ی سفید یا بسیار روشن، حداکثر ۵ رنگ شاد و هماهنگ، عنوان هر بخش داخل یک روبان یا نوار رنگی گرد با یک ایموجی، کادرهای گرد رنگی برای تعریف‌ها (آبی)، نکته‌ها (زرد)، مثال‌ها (سبز) و هشدارها (نارنجی)، و یک قاب گرد رنگی دور صفحه. بالای درسنامه عنوان بزرگ درس و موضوع با شخصیت راهنما، و زیر آن جدول کوچک مشخصات (نام دانش‌آموز: جای خالی، پایه، درس، موضوع، معلم و دبستان) بیاید. محتوا راست‌چین باشد.
+- ${bw?"برگه کاملاً سیاه‌وسفید باشد (مناسب چاپ ارزان): همه‌ی رنگ‌ها را به مشکی، سفید و خاکستری تبدیل کن؛ تصویرها خطی و تک‌رنگ باشند؛ ایموجی‌ها با filter: grayscale(1) بیایند؛ طراحی و انیمیشن حفظ شود. هر جا درباره‌ی «رنگ» گفته شده، منظور طیف خاکستری است.":"برگه رنگی و شاد باشد و رنگ‌ها هنگام چاپ هم حفظ شوند."}
+- کسرها و عبارت‌های ریاضی (در صورت وجود): هرگز از LaTeX، MathJax یا KaTeX استفاده نکن. هر کسر را با <span class="frac"><span class="n">۲</span><span class="d">۳</span></span> و این CSS بنویس: .frac{display:inline-block;vertical-align:middle;text-align:center;direction:ltr;margin:0 3px;line-height:1.3} .frac .n{display:block;border-bottom:1.5px solid currentColor;padding:0 4px} .frac .d{display:block;padding:0 4px}. هر عبارت کامل را داخل <span class="expr" dir="ltr"> با CSS ‏.expr{direction:ltr;unicode-bidi:isolate;white-space:nowrap;display:inline-block} و علامت‌ها را داخل <span class="op">&times;</span> با CSS ‏.op{margin:0 6px;font-weight:700} بگذار.
+
+قالب خروجی HTML: یک فایل کامل و مستقل (dir="rtl"، فونت Vazirmatn با جایگزین Tahoma). فقط کد داخل یک بلوک کد، بدون توضیح قبل یا بعد.
+• تمام درسنامه داخل یک عنصر با id="paper" باشد و دو دکمه‌ی ثابت بالای صفحه بیرون از آن، با کلاس nodoc برای حذف در Word.
+• برای چاپ: @page با size: A4 portrait و margin: 8mm، print-color-adjust: exact، پنهان‌شدن دکمه‌ها، انیمیشن‌ها در چاپ متوقف و تصویر ثابت شوند، همه‌ی <details> در چاپ باز نمایش داده شوند، کارت‌های برگردان در چاپ هر دو روی را کنار هم نشان دهند، و عنصرهای کوچک (کادر، مثال، تصویر با توضیحش) بین دو صفحه نشکنند (break-inside: avoid). تعداد صفحه‌ها محدود نیست؛ ولی صفحه‌ی خالی یا فضای سفید بی‌دلیل نگذار.
+• برای سازگاری با Word: ساختار اصلی متن را ساده و با جدول و عنوان بساز تا بدون SVG و انیمیشن هم درسنامه کامل و خوانا بماند؛ از border-image پرهیز کن و حاشیه را با border رنگی ضخیم بساز.
+
+دو دکمه‌ی ثابت بالای صفحه (هیچ عنصر اضافه‌ی دیگری نیاور):
+1) «دریافت PDF»: با window.print() پنجره‌ی چاپ را باز کند تا کاربر «ذخیره به‌صورت PDF» را انتخاب کند.
+2) «دریافت Word»: بدون هیچ کتابخانه‌ی بیرونی، با تابع زیر فایل را به‌صورت .doc بسازد و دانلود کند:
+
+${SNIP}
+
+نکات مهم:
+- مقدمه یا نتیجه‌گیری خارج از فایل اضافه نکن.
+- اگر اطلاعاتی ناقص بود، فرض معقول انتخاب کن و در یک خط کوچک در پایان درسنامه بنویس.`;
+}
+
+function update(){
+var done=COUNT.filter(function(i){return $(i).value.trim()!==""}).length;
+$("progText").textContent=fa(done)+" از ۶ مورد مشخصات تکمیل شده";
+$("progBar").style.width=Math.round(done/6*100)+"%";
+var n=picked().length;
+$("sum").textContent=n?fa(n)+" بخش انتخاب شده":"بخشی انتخاب نشده؛ هوش مصنوعی خودش تعیین می‌کند.";
+$("out").value=build();
+}
+function sample(){
+var d={teacher:"معلم نمونه",school:"دبستان نمونه",lesson:"علوم تجربی",topic:"چرخه‌ی آب",page:"۱۲ تا ۱۸",focus:"تبخیر، میعان، بارش و نقش خورشید در چرخه‌ی آب",notes:""};
+Object.keys(d).forEach(function(k){$(k).value=d[k]});$("grade").value="چهارم";update();
+}
+function clearForm(){TEXTS.forEach(function(i){$(i).value=""});update()}
+document.addEventListener("input",update);document.addEventListener("change",update);
+$("btnSample").onclick=sample;$("btnClear").onclick=clearForm;
+$("btnCopy").onclick=function(){
+var t=$("out").value,ok=function(){$("msg").textContent="پرامپت کپی شد ✅"},bad=function(){$("out").select();$("msg").textContent="متن انتخاب شد؛ دستی کپی کنید."};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){try{$("out").select();document.execCommand("copy")?ok():bad()}catch(e){bad()}})}
+else{try{$("out").select();document.execCommand("copy")?ok():bad()}catch(e){bad()}}
+};
+update();
+})();
+</script>
+</body>
+</html>
